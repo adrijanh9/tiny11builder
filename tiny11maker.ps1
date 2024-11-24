@@ -274,6 +274,10 @@ if ($response.ToLower() -eq 'y'){
     & 'reg' 'add' 'HKLM\zSOFTWARE\Microsoft\Windows\CurrentVersion\DriverSearching' '/v' 'SearchOrderConfig' '/t' 'REG_DWORD' '/d' '0' '/f' | Out-Null
 }
 
+$response = Read-Host "Disable automatic app updates in Windows Store? (Y/n)"
+if ($response.ToLower() -eq 'y'){
+    & 'reg' 'add' 'HKLM\zSOFTWARE\Microsoft\Windows\CurrentVersion\WindowsStore\WindowsUpdate' '/v' 'AutoDownload' '/t' 'REG_DWORD' '/d' '2' '/f' | Out-Null
+}
 ## this function allows PowerShell to take ownership of the Scheduled Tasks registry key from TrustedInstaller. Based on Jose Espitia's script.
 function Enable-Privilege {
  param(
